@@ -7,9 +7,3 @@ commands:
   generatorRecipe:
     usage: </command>
     description: Shows you the recipe for the item generator
-    aliases:
-      - gRecipe
-      - gr
-      - itemGenecratorRecipe
-      - itemRecipe
-      - igR
