@@ -10,10 +10,10 @@ named `ItemGenerator` will be created in the plugin's folder. In this folder you
 up the Plugin.
 
 ## TODO
-- [ ] Read generatable items from Config
-- [ ] Crafting Recipe for Generator
-- [ ] Custom Block
-- [ ] Show Crafting Recipes in Gui
+- [X] Read generatable items from Config
+- [X] Crafting Recipe for Generator
+- [X] Custom Block
+- [X] Show Crafting Recipes in Gui
 - [ ] Generator GUI
 - [ ] Select Generable Item
 - [ ] Fill generator with energy
