@@ -2,3 +2,4 @@ main: de.bmxertv.itemgenerator.ItemGenerator
 author: Bmxertv_YT
 version: 1.0.0
 name: ItemGenerator
+api-version: 1.17
