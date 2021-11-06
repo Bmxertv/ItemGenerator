@@ -1,0 +1,21 @@
+# Crafting Recipe
+Recipe:
+  # Items for the Recipe
+  # ID: Material (https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html)
+  Items:
+    X: DIAMOND
+    Y: STONE
+  # Recipe for the Generator
+  Crafting:
+    - YYY
+    - YXY
+    - YYY
+
+# On this page you will find all materials
+# https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+AllowItems:
+  - DIAMOND
+  - IRON_INGOT
+  - GOLD_INGOT
+  - COAL
+  - REDSTONE
