@@ -3,3 +3,13 @@ author: Bmxertv_YT
 version: 1.0.0
 name: ItemGenerator
 api-version: 1.17
+commands:
+  generatorRecipe:
+    usage: </command>
+    description: Shows you the recipe for the item generator
+    aliases:
+      - gRecipe
+      - gr
+      - itemGenecratorRecipe
+      - itemRecipe
+      - igR
