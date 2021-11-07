@@ -25,7 +25,7 @@ public record GeneratorRecipe(ItemGenerator itemGenerator) {
         itemMeta.setLore(List.of(
                 ColorUtils.colorize("&8&m-----------------"),
                 ColorUtils.colorize(""),
-                ColorUtils.colorize("&eSneak + Right click to Open the GUI")
+                ColorUtils.colorize("&eRight click to Open the GUI")
         ));
 
         itemStack.setItemMeta(itemMeta);
