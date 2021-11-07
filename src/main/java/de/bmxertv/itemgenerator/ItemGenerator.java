@@ -4,6 +4,7 @@ import de.bmxertv.itemgenerator.command.RecipeCommand;
 import de.bmxertv.itemgenerator.listener.BlockListener;
 import de.bmxertv.itemgenerator.listener.InventoryListener;
 import de.bmxertv.itemgenerator.recipe.GeneratorRecipe;
+import de.bmxertv.itemgenerator.task.GenerateTask;
 import de.bmxertv.itemgenerator.util.ConsoleUtil;
 import de.bmxertv.itemgenerator.util.GeneratorConfig;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ public class ItemGenerator extends JavaPlugin {
     public final String CONSOLE_PREFIX = "[ItemGenerator]";
     private GeneratorRecipe generatorRecipe;
     private GeneratorConfig generatorConfig;
+    private GenerateTask generateTask;
 
     @Override
     public void onEnable() {
@@ -32,6 +34,9 @@ public class ItemGenerator extends JavaPlugin {
         this.generatorRecipe.createRecipe();
 
         this.generatorConfig = new GeneratorConfig();
+
+        this.generateTask = new GenerateTask(this);
+        this.generateTask.start();
 
         getCommand("generatorRecipe").setExecutor(new RecipeCommand(this));
 

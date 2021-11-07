@@ -59,4 +59,8 @@ public class GeneratorMenu {
         player.openInventory(inventory);
     }
 
+    public void update(Player player) {
+        createInventory();
+        openInventory(player);
+    }
 }

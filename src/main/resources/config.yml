@@ -1,3 +1,6 @@
+# Interval when an item is generated (in seconds)
+generateTime: 10
+fullRemoveOnGenerate: 6
 # Crafting Recipe
 Recipe:
   # Items for the Recipe

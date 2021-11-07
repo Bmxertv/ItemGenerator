@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 public class GeneratorConfig {
@@ -91,6 +92,35 @@ public class GeneratorConfig {
         }
     }
 
+    public void addFull(int id, int full) {
+        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+        ConfigurationSection section = getGeneratorsSection(configuration).getConfigurationSection(String.valueOf(id));
+        setFull(id, section.getInt("full") + full);
+    }
+
+    public void removeFull(int id, int full) {
+        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+        ConfigurationSection section = getGeneratorsSection(configuration).getConfigurationSection(String.valueOf(id));
+        int temp = section.getInt("full") - full;
+        setFull(id, temp < 0 ? 0 : temp);
+    }
+
+    public void setFull(int id, int full) {
+        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+        getGeneratorsSection(configuration).getConfigurationSection(String.valueOf(id)).set("full", full);
+        try {
+            configuration.save(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addGenerated(int id, int generated) {
+        YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+        ConfigurationSection section = getGeneratorsSection(configuration).getConfigurationSection(String.valueOf(id));
+        setGenerated(id, section.getInt("generated") + generated);
+    }
+
     public void setGenerated(int id, int generated) {
         YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
         getGeneratorsSection(configuration).getConfigurationSection(String.valueOf(id)).set("generated", generated);
@@ -155,6 +185,52 @@ public class GeneratorConfig {
         int generated = section.getInt("generated");
 
         return new GeneratorModel(Integer.parseInt(generatorId.get()), location, itemStack, full, generated);
+    }
+
+    public GeneratorModel getGeneratorModel(int id) {
+        FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+        ConfigurationSection generatorsSection = getGeneratorsSection(configuration);
+        ConfigurationSection section = generatorsSection.getConfigurationSection(String.valueOf(id));
+
+        ConfigurationSection locationSection = section.getConfigurationSection("location");
+        World world = Bukkit.getWorld(locationSection.getString("world"));
+        int x = locationSection.getInt("x");
+        int y = locationSection.getInt("y");
+        int z = locationSection.getInt("z");
+        Location location = new Location(world, x, y, z);
+
+        Material material = Material.RED_STAINED_GLASS_PANE;
+        String displayName = "&cSelect Item";
+        String[] lore = {
+                "&7&m--------",
+                "",
+                "&7Selects the item you",
+                "&7currently have in your hand",
+                ""
+        };
+
+        if (section.getConfigurationSection("item") != null) {
+            ConfigurationSection itemSection = section.getConfigurationSection("item");
+            material = Material.getMaterial(itemSection.getString("material").toUpperCase());
+            displayName = itemSection.getString("displayName");
+            lore = new String[0];
+        }
+
+        ItemStack itemStack = new ItemBuilder(material).setName(displayName).setLore(lore).create();
+
+        int full = section.getInt("full");
+        int generated = section.getInt("generated");
+
+        return new GeneratorModel(id, location, itemStack, full, generated);
+    }
+
+    public List<GeneratorModel> getGenerators() {
+        FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+        return getGeneratorsSection(configuration)
+                .getKeys(false)
+                .stream()
+                .map(s -> getGeneratorModel(Integer.parseInt(s)))
+                .toList();
     }
 
 }
