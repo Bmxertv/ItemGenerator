@@ -14,7 +14,7 @@ up the Plugin.
 - [X] Crafting Recipe for Generator
 - [X] Custom Block
 - [X] Show Crafting Recipes in Gui
-- [ ] Generator GUI
+- [X] Generator GUI
 - [ ] Select Generable Item
 - [ ] Fill generator with energy
 - [ ] Generate item
